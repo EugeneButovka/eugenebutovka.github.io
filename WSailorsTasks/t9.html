@@ -1,68 +1,184 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
-	<title>My Calculator</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          rel="stylesheet">
+    <title>My Calculator</title>
 </head>
-<body>
+<body class="row">
+<div class="col-6 col-xl-4 col-lg-4 col-md-4 container justify-content-center mx-auto p-0"
+     id="calculator">
+    <div class="row mx-n1">
+        <h1 class="col-12 text-center">Calculator!</h1>
+        <div class="col-12 p-1">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">DISPLAY</span>
+                </div>
+                <input aria-label="calculator input"
+                       class="form-control"
+                       id="calc-input"
+                       type="text">
+            </div>
+        </div>
+        <div class="col-12 p-0">
+            <div class="col-4 p-1">
+                <button class="w-100 btn btn-danger mt-1"
+                        id="btC"
+                        onclick="pressC()"
+                        type="button">C
+                </button>
+            </div>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt1"
+                    onclick="press7()"
+                    type="button">7
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt2"
+                    onclick="press8()"
+                    type="button">8
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt3"
+                    onclick="press9()"
+                    type="button">9
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt4"
+                    onclick="press4()"
+                    type="button">4
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt5"
+                    onclick="press5()"
+                    type="button">5
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt6"
+                    onclick="press6()"
+                    type="button">6
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt7"
+                    onclick="press1()"
+                    type="button">1
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt8"
+                    onclick="press2()"
+                    type="button">2
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt9"
+                    onclick="press3()"
+                    type="button">3
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="bt0"
+                    onclick="press0()"
+                    type="button">0
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="btSign"
+                    onclick="pressChgSign()"
+                    type="button">+/-
+            </button>
+        </div>
+        <div class="col-4 p-1">
+            <button class="w-100 btn btn-dark"
+                    id="btDot"
+                    onclick="pressDot()"
+                    type="button">.
+            </button>
+        </div>
+
+        <div class="col-2 p-1">
+            <button class="w-100 btn btn-warning"
+                    id="btSum"
+                    onclick="pressSum()"
+                    type="button">+
+            </button>
+        </div>
+        <div class="col-2 p-1">
+            <button class="w-100 btn btn-warning"
+                    id="btDiff"
+                    onclick="pressDiff()"
+                    type="button">-
+            </button>
+        </div>
+        <div class="col-2 p-1">
+            <button class="w-100 btn btn-warning"
+                    id="btMult"
+                    onclick="pressMult()"
+                    type="button">*
+            </button>
+        </div>
+        <div class="col-2 p-1">
+            <button class="w-100 btn btn-warning"
+                    id="btDiv"
+                    onclick="pressDiv()"
+                    type="button">/
+            </button>
+        </div>
+        <div class="col-2 p-1">
+            <button class="w-100 btn btn-warning"
+                    id="btPercent"
+                    onclick="pressPercent()"
+                    type="button">%
+            </button>
+        </div>
+        <div class="col-2 p-1">
+            <button class="w-100 btn btn-success"
+                    id="btEq"
+                    onclick="pressEq()"
+                    type="button">=
+            </button>
+        </div>
+    </div>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-		crossorigin="anonymous"></script>
-<script defer src="t9.js"></script>
-
-<div class="container justify-content-center w-25 mx-auto" id="calculator">
-	<h1 class="text-center">Calculator!</h1>
-	<div class="input-group">
-		<div class="input-group-prepend">
-			<span class="input-group-text">DISPLAY</span>
-		</div>
-		<input type="text" aria-label="calculator input" class="form-control" id="calc-input">
-		<!--<div class="input-group-prepend">-->
-		<!--<span class="input-group-text">Результат</span>-->
-		<!--</div>-->
-		<!--<input type="text" aria-label="calculated result" class="form-control" id="calc-result">-->
-	</div>
-	<button type="button" class="btn btn-danger" id="btC" onclick="pressC()">C</button>
-	<br>
-	<div class="row">
-		<div class="col"><button type="button" class="btn btn-dark" id="bt1" onclick="press7()">7</button></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="bt2" onclick="press8()">8</button></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="bt3" onclick="press9()">9</button></div>
-		<div class="w-100"></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="bt4" onclick="press4()">4</button></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="bt5" onclick="press5()">5</button></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="bt6" onclick="press6()">6</button></div>
-		<div class="w-100"></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="bt7" onclick="press1()">1</button></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="bt8" onclick="press2()">2</button></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="bt9" onclick="press3()">3</button></div>
-		<div class="w-100"></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="bt0" onclick="press0()">0</button></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="btSign" onclick="pressChgSign()">+/-</button></div>
-		<div class="col"><button type="button" class="btn btn-dark" id="btDot" onclick="pressDot()">.</button></div>
-	</div>
-	<br>
-	<button type="button" class="btn btn-warning" id="btSum" onclick="pressSum()">+</button>
-	<button type="button" class="btn btn-warning" id="btDiff" onclick="pressDiff()">-</button>
-	<button type="button" class="btn btn-warning" id="btMult" onclick="pressMult()">*</button>
-	<button type="button" class="btn btn-warning" id="btDiv" onclick="pressDiv()">/</button>
-	<button type="button" class="btn btn-warning" id="btPercent" onclick="pressPercent()">%</button>
-	<button type="button" class="btn btn-success" id="btEq" onclick="pressEq()">=</button>
-</div>
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script defer
+        src="t9.js"></script>
 </body>
 </html>
