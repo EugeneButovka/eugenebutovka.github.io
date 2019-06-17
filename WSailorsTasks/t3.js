@@ -74,7 +74,7 @@ let b7_clone_deep = JSON.parse(JSON.stringify(a7));//deep copy with conversion t
 //!!! This only works if you do not have any inner objects and functions, but just values. !!!
 
 let b7_clone_deep2 = deepCopy(a7, false, true);//deep copy with custom recursive function
-//let b7_clone_deep3 =lodash.clonedeep(a7);
+let b7_clone_deep3 =_.cloneDeep(a7);
 
 a7.map((obj) => {
     obj.name = obj.name + ' Pupkin';
@@ -86,7 +86,7 @@ console.log('b7_clone_shallow = ', b7_clone_shallow);
 console.log('b7_clone_shallow2 = ', b7_clone_shallow2);
 console.log('b7_clone_deep = ', b7_clone_deep);
 console.log('b7_clone_deep2 = ', b7_clone_deep2);
-
+console.log('b7_clone_deep3 = ', b7_clone_deep3);
 
 
 
