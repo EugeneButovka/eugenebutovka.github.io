@@ -81,44 +81,12 @@ function pressDot() {
 function pressNumber(number) {
     if(isErrorRaised)return;
 
-    if(operationPressed)
-    {
+    if(operationPressed){
         clearInput();
         operationPressed = false;
     }
 
-    switch (number) {
-        case 0:
-            inputId.value += "0";
-            break;
-        case 1:
-            inputId.value += "1";
-            break;
-        case 2:
-            inputId.value += "2";
-            break;
-        case 3:
-            inputId.value += "3";
-            break;
-        case 4:
-            inputId.value += "4";
-            break;
-        case 5:
-            inputId.value += "5";
-            break;
-        case 6:
-            inputId.value += "6";
-            break;
-        case 7:
-            inputId.value += "7";
-            break;
-        case 8:
-            inputId.value += "8";
-            break;
-        case 9:
-            inputId.value += "9";
-            break;
-    }
+    inputId.value += number.toString();
 }
 
 //UGEN: add button highlighting
