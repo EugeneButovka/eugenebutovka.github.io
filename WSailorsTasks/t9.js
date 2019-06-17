@@ -1,6 +1,8 @@
 let calcOperand1,calcOperand2,calcOperation,calcResult;
 let inputId=document.getElementById("calc-input");
 let outputId=inputId;//document.getElementById("calc-output");
+let operationPressed;
+let isErrorRaised;
 
 //executable code
 initCalculator();
@@ -9,42 +11,40 @@ initCalculator();
 //function declarations
 function initCalculator() {
     voidCalculation();
+    operationPressed = false;
 }
 
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function getOperand1() {
-    if(isNumeric(inputId.value)){
-        calcOperand1 = Number(inputId.value);
-        clearInput();
-    }
-    else setCalculationErr();
+function getOperand(operandNumber) {
+    let inputNumber = parseFloat(inputId.value);
 
-}
-
-function getOperand2() {
-    if(isNumeric(inputId.value)){
-        calcOperand2 = Number(inputId.value);
-        clearInput();
+    if(!isNumeric(inputNumber)) {
+        setCalculationErr();
+        return;
     }
-    else setCalculationErr();
+
+    if(operandNumber===1)calcOperand1 = inputNumber;
+    else calcOperand2 =  inputNumber;
 }
 
 function clearInput() {
-    inputId.value="";
+    inputId.value = "";
 }
 
 function voidCalculation() {
-    calcOperand1=null;
-    calcOperand2=null;
-    calcOperation="";
+    calcOperand1 = null;
+    calcOperand2 = null;
+    calcOperation = "";
 }
 
 function setCalculationErr(){
     voidCalculation();
-    inputId.value="Error, press C";
+    operationPressed = false;
+    inputId.value = "Error, press C";
+    isErrorRaised = true;
 }
 
 function showResult() {
@@ -55,91 +55,79 @@ function showResult() {
 function pressC() {
     voidCalculation();
     clearInput();
+    operationPressed = false;
+    isErrorRaised = false;
 }
 
 function pressEq() {
-    getOperand2();
+    if(isErrorRaised)return;
+    getOperand(2);
     calculate();
     showResult();
     voidCalculation();
 }
 
 function pressChgSign() {
-    if(inputId.value[0]!=="-")inputId.value = "-"+inputId.value;
+    if(isErrorRaised)return;
+    if(inputId.value[0] !== "-") inputId.value = "-" + inputId.value;
     else inputId.value = inputId.value.slice(1);
 }
 
 function pressDot() {
-    inputId.value+=".";
+    if(isErrorRaised)return;
+    inputId.value += ".";
 }
 
-function press0() {
-    inputId.value+="0";
+function pressNumber(number) {
+    if(isErrorRaised)return;
+
+    if(operationPressed)
+    {
+        clearInput();
+        operationPressed = false;
+    }
+
+    switch (number) {
+        case 0:
+            inputId.value += "0";
+            break;
+        case 1:
+            inputId.value += "1";
+            break;
+        case 2:
+            inputId.value += "2";
+            break;
+        case 3:
+            inputId.value += "3";
+            break;
+        case 4:
+            inputId.value += "4";
+            break;
+        case 5:
+            inputId.value += "5";
+            break;
+        case 6:
+            inputId.value += "6";
+            break;
+        case 7:
+            inputId.value += "7";
+            break;
+        case 8:
+            inputId.value += "8";
+            break;
+        case 9:
+            inputId.value += "9";
+            break;
+    }
 }
 
-function press1() {
-    inputId.value+="1";
-}
-
-function press2() {
-    inputId.value+="2";
-}
-
-function press3() {
-    inputId.value+="3";
-}
-
-function press4() {
-    inputId.value+="4";
-}
-
-function press5() {
-    inputId.value+="5";
-}
-
-function press6() {
-    inputId.value+="6";
-}
-function press7() {
-    inputId.value+="7";
-}
-
-function press8() {
-    inputId.value+="8";
-}
-
-function press9() {
-    inputId.value+="9";
-}
-
-function pressMult() {
-    if(calcOperation!=="")pressEq();
-    calcOperation="Multiply";
-    getOperand1();
-}
-
-function pressDiv() {
-    if(calcOperation!=="")pressEq();
-    calcOperation="Divide";
-    getOperand1();
-}
-
-function pressSum() {
-    if(calcOperation!=="")pressEq();
-    calcOperation="Sum";
-    getOperand1();
-}
-
-function pressDiff() {
-    if(calcOperation!=="")pressEq();
-    calcOperation="Diff";
-    getOperand1();
-}
-
-function pressPercent() {
-    if(calcOperation!=="")pressEq();
-    calcOperation="Percent";
-    getOperand1();
+//UGEN: add button highlighting
+function pressOperation(operation) {
+    if(isErrorRaised)return;
+    if(calcOperation!=="") pressEq();
+    calcOperation = operation;
+    getOperand(1);
+    operationPressed = true;
 }
 
 function calculate() {
@@ -164,7 +152,6 @@ function calculate() {
             result = NaN;
             break;
     }
-    calcResult=result;
-    //return isNumeric(result);
+    calcResult = result;
 }
 
