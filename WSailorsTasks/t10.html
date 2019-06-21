@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Place Autocomplete</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8">
+	<link crossorigin="anonymous"
+		  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		  rel="stylesheet">
+	<link rel="stylesheet" href="t10.css">
+</head>
+<body>
+<div class="pac-card" id="pac-card">
+	<div>
+		<div id="title">
+			Autocomplete search
+		</div>
+		<div id="type-selector" class="pac-controls">
+			<input type="radio" name="type" id="changetype-all" checked="checked">
+			<label for="changetype-all">All</label>
+			
+			<input type="radio" name="type" id="changetype-establishment">
+			<label for="changetype-establishment">Establishments</label>
+			
+			<input type="radio" name="type" id="changetype-address">
+			<label for="changetype-address">Addresses</label>
+			
+			<input type="radio" name="type" id="changetype-geocode">
+			<label for="changetype-geocode">Geocodes</label>
+		</div>
+		<div id="strict-bounds-selector" class="pac-controls">
+			<input type="checkbox" id="use-strict-bounds" value="">
+			<label for="use-strict-bounds">Strict Bounds</label>
+		</div>
+	</div>
+	<div id="pac-container">
+		<input id="pac-input" type="text"
+			   placeholder="Enter a location">
+	</div>
+</div>
+<div id="map"></div>
+<div id="infowindow-content">
+	<img src="" width="16" height="16" id="place-icon">
+	<span id="place-name" class="title"></span><br>
+	<span id="place-address"></span>
+</div>
+<!-- Replace the value of the key parameter with your own API key. -->
+
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
+<script crossorigin="anonymous"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="t10.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4RjQvK8Hnp65hjd8qr19JqDU8KKvYIQQ&libraries=places&callback=initMap"
+		async defer></script>
+</body>
+</html>
