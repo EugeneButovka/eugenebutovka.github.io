@@ -36,6 +36,8 @@ html, body {
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 	background-color: #fff;
 	font-family: Roboto;
+	
+	width: 450px;
 }
 
 #pac-container {
@@ -84,6 +86,7 @@ html, body {
 	max-height: 300px;
 	/*overflow-x: auto;*/
 	overflow-y: auto;
+	width: 400px;
 }
 
 .tbody{
