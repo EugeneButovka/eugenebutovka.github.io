@@ -50,16 +50,10 @@ function initMap() {
 // get weather data according to the location
 function getWeather(lat, long) {
     const root = "https://api.openweathermap.org/data/2.5/forecast?appid=0b078dc7f8ba04372a3c93f3eecba42c&units=metric";
-
-
-    fetch(`${root}&lat=${lat}&lon=${long}`, { method: "get" })
-        .then(resp => resp.json())
-        .then(data => {
-            makeWeatherTable(weatherDataToArray(data));
-        })
-        .catch(function(err) {
-            console.error(err);
-        });
+    httpGet(`${root}&lat=${lat}&lon=${long}`)
+        .then(resp => JSON.parse(resp))
+        .then(data => makeWeatherTable(weatherDataToArray(data)))
+        .catch(err => console.error(err));
 }
 
 function weatherDataToArray(weatherData){
@@ -86,77 +80,57 @@ function getDateTimeStringFromUnixUTC(dateUnixUTC) {
 
 function makeWeatherTable(arr)
 {
-    $('#pac-card table').remove();
-    arr.unshift(['Date','Temp,&#x2103;', 'Weather Condition']);
-    var table = arrayToTable(arr, {
-        thead: true,
-        attrs: {class: 'table table-bordered table-responsive'}
-    });
+    let oldTable = document.body.querySelector('#pac-card table');
+    if(oldTable)oldTable.remove();
 
-    $('#pac-card').append(table);
+    arr.unshift(['Date','Temp,&#x2103;', 'Weather Condition']); // add starting row with table head captions
+    let table = arrayToTableDOMStyle(arr, {class: 'table table-bordered table-responsive'});
+
+    document.body.querySelector('#pac-card').appendChild(table);
 }
 
 
-function arrayToTable(data, options) {
-    "use strict";
+function arrayToTableDOMStyle(data, attrs) {
+    var table = document.createElement("table");
 
-    var table = $('<table />'),
-        thead,
-        tfoot,
-        rows = [],
-        row,
-        i,
-        j,
-        defaults = {
-            th: true, // should we use th elemenst for the first row
-            thead: false, //should we incldue a thead element with the first row
-            tfoot: false, // should we include a tfoot element with the last row
-            attrs: {} // attributes for the table element, can be used to
-        };
-
-    options = $.extend(defaults, options);
-
-    table.attr(options.attrs);
-
-    // loop through all the rows, we will deal with tfoot and thead later
-    for (i = 0; i < data.length; i = i + 1) {
-        row = $('<tr />');
-        for (j = 0; j < data[i].length; j = j + 1) {
-            if (i === 0 && options.th) {
-                row.append($('<th />').html(data[i][j]));
-            } else {
-                row.append($('<td />').html(data[i][j]));
+    function setAttributes(elem, obj) {
+        for (var prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
+                elem.setAttribute(prop, obj[prop]);
             }
         }
-        rows.push(row);
     }
 
-    // if we want a thead use shift to get it
-    if (options.thead) {
-        thead = rows.shift();
-        thead = $('<thead />').append(thead);
-        table.append(thead);
-    }
+    setAttributes(table, attrs);
 
-    // if we want a tfoot then pop it off for later use
-    if (options.tfoot) {
-        tfoot = rows.pop();
-    }
+    var thead = document.createElement("thead");
+    var tbody = document.createElement("tbody");
+    var headRow = document.createElement("tr");
 
-    // add all the rows
-    for (i = 0; i < rows.length; i = i + 1) {
-        table.append(rows[i]);
-    }
+    //creating table head
+    data[0].forEach(function(el) {
+        var th=document.createElement("th");
+        th.innerHTML = el;
+        headRow.appendChild(th);
+    });
+    thead.appendChild(headRow);
 
-    // and finally add the footer if needed
-    if (options.tfoot) {
-        tfoot = $('<tfoot />').append(tfoot);
-        table.append(tfoot);
-    }
+    //creating table body
+    table.appendChild(thead);
+    data.forEach(function(rowElement, i) {
+        if(i===0)return;//skip first data row - it is in the head
+        var tr = document.createElement("tr");
+        rowElement.forEach((element, j) =>{
+            let td = document.createElement("td");
+            td.appendChild(document.createTextNode(element));
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
 
     return table;
 }
-
 
 function httpGet(url) {
 
@@ -182,9 +156,3 @@ function httpGet(url) {
         xhr.send();
     });
 }
-
-httpGet("https://eugenebutovka.github.io/user.json")
-    .then(
-        response => console.log(`Fulfilled: ${response}`),
-        error => console.log(`Rejected: ${error}`)
-    );
